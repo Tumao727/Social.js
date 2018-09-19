@@ -1,4 +1,4 @@
-;(function(global) {
+; (function (global) {
 
     // start a new object 
     const Social = (firstName, lastName, language) => {
@@ -34,36 +34,43 @@
 
     // prototype holds methods (to save memory space)
     Social.prototype = {
-        fullName: () => {
+        fullName: function () {
             return `${this.firstName} ${this.lastName}`
         },
 
         // check whether it is a valid language
-        validate: () => {
+        validate: function () {
             if (!supportedLangs.includes(this.language)) {
                 throw 'Invalid Language'
             }
         },
 
-        greeting: () => {
-            return `${greetings[this.language]} ${this.firstName} !`
+        greeting: function () {
+            return `${greetings[this.language]} ${this.firstName}!`
         },
 
-        formalGreeting: () => {
+        formalGreeting: function () {
             return `${formalGreetings[this.language]}, ${this.fullName()}`
         },
 
-        farewell: () => {
+        farewell: function () {
             return `${farewells[this.language]} ${this.firstName} !`
         },
 
-        formalFarewell: () => {
+        formalFarewell: function () {
             return `${formalFarewells[this.language]}, ${this.fullName()}`
+        },
+
+        setLang: function (lang) {
+            this.language = lang
+            this.validate()
+
+            return this
         }
     }
 
     // the actual object is created here, allowing us to 'new' an object without calling 'new'
-    Social.init = function(firstName, lastName, language) {
+    Social.init = function (firstName, lastName, language) {
         this.firstName = firstName || ''
         this.lastName = lastName || ''
         this.language = language || 'cn'
